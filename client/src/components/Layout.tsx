@@ -1,4 +1,5 @@
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+import './Layout.css';
 
 const Layout: React.FC = () => {
     return (
@@ -8,13 +9,13 @@ const Layout: React.FC = () => {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <NavLink to="/">Home</NavLink>
                             </li>
                             <li>
-                                <Link to="/misdemeanour">Misdemeanours</Link>
+                                <NavLink to="/misdemeanour">Misdemeanours</NavLink>
                             </li>
                             <li>
-                                <Link to="/confession">Confession</Link>
+                                <NavLink to="/confession">Confession</NavLink>
                             </li>
                         </ul>
                     </nav>

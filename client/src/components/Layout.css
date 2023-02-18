@@ -1,0 +1,5 @@
+/* make active class for active link in navbar hilighted */
+.active {
+  color: #fff;
+  background-color: #007bff;
+}
