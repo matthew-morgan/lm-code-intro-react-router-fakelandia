@@ -1,39 +1,52 @@
 import { Route, Routes } from 'react-router-dom';
-import Misdemeanour from './components/Misdemeanour';
+import MisdemeanourList from './components/MisdemeanourList';
 import Confession from './components/Confession';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Layout from './components/Layout';
-import { useState, useEffect } from 'react';
-import { MisdemeanourKind } from './types/misdemeanours.types';
+import React, { useState, useEffect, useContext } from 'react';
+import { Misdemeanour } from './types/misdemeanours.types';
 import './App.css';
+
+export const MisdemeanourContext = React.createContext<Misdemeanour[]>([]);
+
+type MisdemeanourResponse = {
+  misdemeanours: Misdemeanour[];
+};
 
 function App() {
 
-  const [misdemeanours, setMisdemeanours] = useState<MisdemeanourKind[]>([]);
+  const [misdemeanours, setMisdemeanours] = useState<Misdemeanour[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/misdemeanours/10').then((response) => {
-      if (response.ok) {
-        return response.json();
+    const fetchMisdemeanours = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/misdemeanours/10');
+        if (response.ok) {
+          const jsonResponse = await response.json() as MisdemeanourResponse;
+          setMisdemeanours(jsonResponse.misdemeanours);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    }).then((jsonResponse) => {
-      setMisdemeanours(jsonResponse);
-    });
+    };
+
+    fetchMisdemeanours();
   }, []);
 
-  console.log(misdemeanours);
-
+  useContext(MisdemeanourContext);
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/misdemeanour" element={<Misdemeanour />} />
-        <Route path="/confession" element={<Confession />} />
-        <Route path='*' element={<NotFound />} />
-      </Route>
-    </Routes>
+    <MisdemeanourContext.Provider value={misdemeanours}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/misdemeanour" element={<MisdemeanourList />} />
+          <Route path="/confession" element={<Confession />} />
+          <Route path='*' element={<NotFound />} />
+        </Route>
+      </Routes>
+    </MisdemeanourContext.Provider>
   );
 }
 
