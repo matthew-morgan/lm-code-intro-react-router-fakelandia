@@ -15,13 +15,14 @@ const MisdemeanourList: React.FC = () => {
 
 const MisdemeanourTable: React.FC<{ misdemeanours: Misdemeanour[] }> = ({ misdemeanours }) => {
   const [selectedMisdemeanour, setSelectedMisdemeanour] = useState<string>("All");
+  const picsumUrl = "https://picsum.photos/100/100?random=";
 
   const filteredMisdemeanours = selectedMisdemeanour !== "All"
     ? misdemeanours.filter(m => m.misdemeanour === selectedMisdemeanour)
     : misdemeanours;
 
   const misdemeanourOptions = ['All', ...MISDEMEANOURS];
-  
+
   return (
     <table>
       <thead>
@@ -29,6 +30,7 @@ const MisdemeanourTable: React.FC<{ misdemeanours: Misdemeanour[] }> = ({ misdem
           <th>Citizen ID</th>
           <th>Misdemeanour</th>
           <th>Date</th>
+          <th>Punishment</th>
         </tr>
         <tr>
           <th></th>
@@ -46,6 +48,7 @@ const MisdemeanourTable: React.FC<{ misdemeanours: Misdemeanour[] }> = ({ misdem
             <td>{m.citizenId}</td>
             <td>{m.misdemeanour}</td>
             <td>{m.date}</td>
+            <td><img src = {picsumUrl + m.citizenId} alt = "punishment" /></td>
           </tr>
         ))}
       </tbody>
