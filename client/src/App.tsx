@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import MisdemeanourList from './components/MisdemeanourList';
-import Confession from './components/Confession';
+import ConfessionForm from './components/ConfessionForm';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Layout from './components/Layout';
@@ -42,7 +42,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/misdemeanour" element={<MisdemeanourList />} />
-          <Route path="/confession" element={<Confession />} />
+          <Route path="/confession" element={<ConfessionForm />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
