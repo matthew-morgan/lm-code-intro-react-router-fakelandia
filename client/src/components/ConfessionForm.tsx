@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import SubjectInput from './SubjectInput';
 import ReasonDropdown from './ReasonDropdown';
 import DetailsTextarea from './DetailsTextarea';
 import { MisdemeanourKind, JustTalk } from '../types/misdemeanours.types';
+import { MisdemeanourContext } from '../App';
 
 type FormValues = {
   subject: string;
   reason: MisdemeanourKind | JustTalk;
   details: string;
+};
+
+type ResponseValues = {
+  success: boolean;
+  justTalked: boolean;
+  message: string;
 };
 
 const ConfessionForm: React.FC = () => {
@@ -16,8 +23,10 @@ const ConfessionForm: React.FC = () => {
     reason: 'just-talk',
     details: '',
   });
-  const [isFormValid, setIsFormValid] = useState(false);
 
+  const misdemeanours = useContext(MisdemeanourContext);
+
+  const [isFormValid, setIsFormValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -44,22 +53,36 @@ const ConfessionForm: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data: ResponseValues = await response.json();
+
+      console.log(data);
 
       if (!data.success) {
         setErrorMessage(data.message);
-      } else {
-        setSuccessMessage('Form submitted successfully!');
+      }
+      else {
+        setSuccessMessage(data.message);
+      } 
+      
+      if (!data.justTalked) {
+        misdemeanours.push({
+          citizenId: Math.floor(Math.random() * 1000),
+          misdemeanour: reason as MisdemeanourKind,
+          date: new Date().toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+          }),
+        });
       }
 
       if (!response.ok) {
-        //throw new Error(`Failed to submit form: ${response.status}`);
         setErrorMessage(`Failed to submit form: ${response.status}`);
       }
       // Handle the server response
     } catch (error) {
       // Handle network errors and failed requests
-      setErrorMessage("network error");
+      setErrorMessage("Network error");
     }
   };
 
