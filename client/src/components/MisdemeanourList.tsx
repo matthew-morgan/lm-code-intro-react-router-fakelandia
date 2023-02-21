@@ -1,6 +1,7 @@
 import { MisdemeanourContext } from "../App";
 import { useContext, useState } from 'react';
 import { Misdemeanour, MISDEMEANOURS } from "../types/misdemeanours.types";
+import './MisdemeanourList.css'
 
 const MisdemeanourList: React.FC = () => {
   const misdemeanours = useContext(MisdemeanourContext);
@@ -48,7 +49,7 @@ const MisdemeanourTable: React.FC<{ misdemeanours: Misdemeanour[] }> = ({ misdem
             <td>{m.citizenId}</td>
             <td>{m.misdemeanour}</td>
             <td>{m.date}</td>
-            <td><img src = {picsumUrl + m.citizenId} alt = "punishment" /></td>
+            <td><img src={picsumUrl + m.citizenId} alt="punishment" /></td>
           </tr>
         ))}
       </tbody>

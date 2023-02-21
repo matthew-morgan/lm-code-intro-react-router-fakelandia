@@ -3,3 +3,27 @@
   color: #fff;
   background-color: #007bff;
 }
+
+ul {
+  display: flex;
+  justify-content: center;
+  /* To horizontally center the links */
+  list-style-type: none;
+  border: 1px solid black;
+  /* Draw a 1px solid black border around the ul element */
+  padding: 10px;
+  margin: 10px;
+}
+
+li {
+  margin: 0 10px;
+  /* Set a 10px margin on both sides of each link */
+}
+
+.title {
+  text-align: left;
+  color: #333;
+  display: block;
+  text-align: left;
+  text-emphasis: bold;
+}

@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+body {
+  font-family: 'Architects Daughter', cursive;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

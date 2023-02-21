@@ -4,6 +4,7 @@ import ReasonDropdown from './ReasonDropdown';
 import DetailsTextarea from './DetailsTextarea';
 import { MisdemeanourKind, JustTalk } from '../types/misdemeanours.types';
 import { MisdemeanourContext } from '../App';
+import './ConfessionForm.css'
 
 type FormValues = {
   subject: string;
@@ -62,8 +63,8 @@ const ConfessionForm: React.FC = () => {
       }
       else {
         setSuccessMessage(data.message);
-      } 
-      
+      }
+
       if (!data.justTalked) {
         misdemeanours.push({
           citizenId: Math.floor(Math.random() * 1000),
@@ -102,6 +103,12 @@ const ConfessionForm: React.FC = () => {
 
   return (
     <>
+      <p>
+        It's very difficult to catch people committing misdemeanours so we appreciate it when citizens confess to us directly.
+      </p>
+      <p>
+        However, if you're just having a hard day and need to vent then you're welcome to contact us here too. Up to you!
+      </p>
       <form onSubmit={handleSubmit}>
         <SubjectInput
           value={formValues.subject}
@@ -116,7 +123,7 @@ const ConfessionForm: React.FC = () => {
           onChange={(value) => handleInputChange('details', value)}
         />
         <button type="submit" disabled={!isFormValid}>
-          Submit
+          Confess
         </button>
       </form>
 

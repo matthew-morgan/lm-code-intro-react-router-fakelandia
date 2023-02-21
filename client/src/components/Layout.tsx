@@ -8,6 +8,9 @@ const Layout: React.FC = () => {
                 <header>
                     <nav>
                         <ul>
+                            <li className="title">
+                                Fakelandia Justice Department
+                            </li>
                             <li>
                                 <NavLink to="/">Home</NavLink>
                             </li>

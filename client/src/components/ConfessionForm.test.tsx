@@ -21,7 +21,7 @@ describe('ConfessionForm', () => {
         const { getByLabelText, getByRole } = render(<ConfessionForm />);
         const subjectInput = getByLabelText('Subject:');
         const detailsTextarea = getByLabelText('Details:');
-        const submitButton = getByRole('button', { name: 'Submit' });
+        const submitButton = getByRole('button', { name: 'Confess' });
 
         fireEvent.change(subjectInput, { target: { value: 'Test subject' } });
         fireEvent.change(detailsTextarea, { target: { value: 'Test details' } });
@@ -33,7 +33,7 @@ describe('ConfessionForm', () => {
         const { getByLabelText, getByRole } = render(<ConfessionForm />);
         const subjectInput = getByLabelText('Subject:');
         const detailsTextarea = getByLabelText('Details:');
-        const submitButton = getByRole('button', { name: 'Submit' });
+        const submitButton = getByRole('button', { name: 'Confess' });
 
         fireEvent.change(subjectInput, { target: { value: '' } });
         fireEvent.change(detailsTextarea, { target: { value: '' } });
